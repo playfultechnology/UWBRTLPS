@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Positioning : MonoBehaviour {
     public List<GameObject> tags = new List<GameObject>();
-    [VectorLabels("r1", "r2", "r3")]
+
     public List<Vector3> ranges = new List<Vector3>();
     // The x-axis is defined as the direction between the first two anchors
     public Transform[] anchors;
