@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 //using UnityEditor;
 
 public class Positioning : MonoBehaviour {
@@ -9,6 +11,16 @@ public class Positioning : MonoBehaviour {
     public List<Vector3> ranges = new List<Vector3>();
     // The x-axis is defined as the direction between the first two anchors
     public Transform[] anchors;
+
+    [Serializable]
+    public class JsonParseLink {
+        public string a;
+        public float r;
+    }
+    public class JsonParseLinks {
+        public string id;
+        public JsonParseLink[] links;
+    }
 
     // See https://en.wikipedia.org/wiki/True-range_multilateration#Three_Cartesian_dimensions,_three_measured_slant_ranges
     Vector3 RangeToPosition(float r1, float r2, float r3) {
@@ -25,20 +37,10 @@ public class Positioning : MonoBehaviour {
         return new Vector3(x, z, y);
     }
 
-
-    void OnDrawGizmos() {
-#if UNITY_EDITOR
-        UnityEditor.Handles.color = Color.cyan;
-        for (int i = 0; i < anchors.Length; i++) {
-            UnityEditor.Handles.Label(anchors[i].position, string.Concat("Anchor ", i));
-        }
-#endif
-    }
-
-
     // Start is called before the first frame update
     void Start() {
-
+        //DecodeJSONUpdate("{\"id\":\"1234\",\"links\":[{\"id\":\"5678\",\"range\":\"2.2\"}]}");
+        
     }
 
     // Update is called once per frame
@@ -47,4 +49,21 @@ public class Positioning : MonoBehaviour {
             tags[i].transform.position = RangeToPosition(ranges[i].x, ranges[i].y, ranges[i].z);
         }
     }
+
+
+    public void DecodeJSONUpdate(string JSON) {
+
+        // Parse the incoming JSON string into an array of links
+        JsonParseLinks ll = JsonUtility.FromJson<JsonParseLinks>(JSON);
+        // Convert into a dictionary for convenience
+        //Dictionary<string, JsonParseLink> links = ll.links.ToDictionary(i => i.id, i => i);
+        // Iterate over hte values received
+        Debug.Log($"From tag {ll.id}: ");
+        foreach (JsonParseLink l in ll.links) {
+            Debug.Log($"{l.a} {l.r}");
+        }
+
+      }
+
+
 }
