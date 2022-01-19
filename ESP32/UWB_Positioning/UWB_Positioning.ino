@@ -16,7 +16,7 @@
 // Every UWB device must have a unique EUI
 // I'm using x2:xx:xx to define a locally-administered address suitable for testing.
 // See: https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local
-#define TAG_ADDR "02:00:00:00:00:00:56:78"
+#define TAG_ADDR "02:00:00:00:00:00:55:55"
 
 // CONSTANTS
 #ifdef IS_TAG
@@ -26,7 +26,7 @@
   const char *ssid = "Hyrule";
   const char *password = "molly1869";
   // IP address of server to send location information to
-  const char *host = "192.168.0.121";
+  const char *host = "192.168.0.155";
   uint16_t portNum = 50000;
 #endif
 
@@ -40,7 +40,7 @@ DisplaySSD1306_128x64_I2C display(-1); // This line is suitable for most platfor
   // Timestamp at which updated data was last broadcast
   unsigned long lastUpdateTime = 0;
   // Time interval (in ms) between updates
-  unsigned int updateInterval = 1000;
+  unsigned int updateInterval = 200;
   String all_json = "";
 #endif
 
@@ -107,7 +107,7 @@ void setup() {
     udp.begin(50000);
   #endif
 
-  Serial.print(TAG_ADDR);
+  Serial.println(TAG_ADDR);
   display.printFixed(0, 8, TAG_ADDR, STYLE_NORMAL);
 
   byte* currentShortAddress = DW1000Ranging.getCurrentShortAddress();
@@ -134,6 +134,8 @@ void loop() {
 
   #ifdef IS_TAG
     if((millis() - lastUpdateTime) > updateInterval){
+
+      /*
       // Create the JSON string describing all links
         make_link_json(uwb_data, &all_json);
       uint8_t buffer[50];
@@ -143,7 +145,7 @@ void loop() {
       udp.beginPacket(host, portNum);
       udp.write(buffer, count+1);
       udp.endPacket();
-
+    */
         
        prepare_json(uwb_data);
       

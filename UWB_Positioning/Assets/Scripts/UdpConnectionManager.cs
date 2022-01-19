@@ -51,8 +51,8 @@ public class UdpConnectionManager : MonoBehaviour
 
     void Update() {
         foreach (string message in connection.getMessages()) {
-            Debug.Log(message);
-            ServerLog("Received message " + System.Uri.EscapeUriString(message) + " has no special behaviour");
+            //Debug.Log(message);
+            //ServerLog("Received message " + System.Uri.EscapeUriString(message) + " has no special behaviour");
             GetComponent<Positioning>().DecodeJSONUpdate(message);
         }
         // connection.Send("Hi!");

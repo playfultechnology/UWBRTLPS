@@ -39,8 +39,7 @@ public class Positioning : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        //DecodeJSONUpdate("{\"id\":\"1234\",\"links\":[{\"id\":\"5678\",\"range\":\"2.2\"}]}");
-        
+        // DecodeJSONUpdate("{\"id\":\"1234\",\"links\":[{\"id\":\"5678\",\"range\":\"2.2\"}]}");
     }
 
     // Update is called once per frame
@@ -50,20 +49,37 @@ public class Positioning : MonoBehaviour {
         }
     }
 
-
     public void DecodeJSONUpdate(string JSON) {
-
         // Parse the incoming JSON string into an array of links
         JsonParseLinks ll = JsonUtility.FromJson<JsonParseLinks>(JSON);
+
         // Convert into a dictionary for convenience
         //Dictionary<string, JsonParseLink> links = ll.links.ToDictionary(i => i.id, i => i);
-        // Iterate over hte values received
+
+        // Iterate over the values received
         Debug.Log($"From tag {ll.id}: ");
-        foreach (JsonParseLink l in ll.links) {
-            Debug.Log($"{l.a} {l.r}");
+        int index = -1;
+        // Find the index of the tag with this id
+        for (int i = 0; i < tags.Count; i++) {
+            if (tags[i].name == ll.id) {
+                Debug.Log($"Which is index {i}");
+                index = i;
+            }
         }
 
-      }
 
+        // If the tag was found in the list
+        if (index > -1) {
+            // Get the existing values for this tag
+            float x = ranges[index].x, y = ranges[index].y, z = ranges[index].z;
 
+            foreach (JsonParseLink l in ll.links) {
+                Debug.Log($"{l.a} {l.r}");
+                if (l.a == "1") { x = l.r; }
+                if (l.a == "2") { y = l.r; }
+                if (l.a == "3") { z = l.r; }
+            }
+            ranges[index] = new Vector3(x, y, z);
+        }
+    }
 }

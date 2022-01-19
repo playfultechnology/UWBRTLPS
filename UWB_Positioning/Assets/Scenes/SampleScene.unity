@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185385302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1058,7 +1058,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - {fileID: 2029340640}
-  ranges: []
+  ranges:
+  - {x: 0, y: 0, z: 0}
   anchors:
   - {fileID: 1846640858}
   - {fileID: 185385306}
@@ -1360,7 +1361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149482832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 50}
+  m_LocalPosition: {x: 4, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1450,7 +1451,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 333374145}
   m_HandleRect: {fileID: 333374144}
   m_Direction: 2
-  m_Value: 0.9999982
+  m_Value: 1.0000018
   m_Size: 0.9433333
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1684,7 +1685,7 @@ GameObject:
   - component: {fileID: 2029340642}
   - component: {fileID: 2029340641}
   m_Layer: 0
-  m_Name: Tag_A
+  m_Name: 5555
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
