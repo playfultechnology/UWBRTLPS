@@ -94,22 +94,3 @@ void delete_link(struct MyLink *p, uint16_t addr) {
   }
   return;
 }
-
-
-// Populate a JSON string containing all links
-void make_link_json(struct MyLink *p, String *s) {
-  *s = "{\"links\":[";
-  struct MyLink *temp = p;
-
-  while (temp->next != NULL) {
-    temp = temp->next;
-    char link_json[50];
-    sprintf(link_json, "{\"A\":\"%X\",\"R\":\"%.1f\"}", temp->anchor_addr, temp->range[0]);
-    *s += link_json;
-    if (temp->next != NULL) {
-      *s += ",";
-    }
-  }
-  *s += "]}";
-  Serial.println(*s);
-}

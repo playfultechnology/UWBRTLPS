@@ -13,4 +13,3 @@ struct MyLink *find_link(struct MyLink *p, uint16_t addr);
 void update_link(struct MyLink *p, uint16_t addr, float range, float dbm);
 void print_link(struct MyLink *p);
 void delete_link(struct MyLink *p, uint16_t addr);
-void make_link_json(struct MyLink *p, String *s);

@@ -22,9 +22,17 @@ public class Positioning : MonoBehaviour {
         public JsonParseLink[] links;
     }
 
+    // Start is called before the first frame update
+    void Start() {
+    }
+
     // See https://en.wikipedia.org/wiki/True-range_multilateration#Three_Cartesian_dimensions,_three_measured_slant_ranges
     Vector3 RangeToPosition(float r1, float r2, float r3) {
-
+        // Calibration adjustment
+        r1 -= .45f;
+        r2 -= .60f;
+        r3 -= .35f;
+        
         // U is the displacement in the x axis between the first two anchors
         float U = (anchors[1].position.x - anchors[0].position.x);
         float V2 = (anchors[2].position.x * anchors[2].position.x) + (anchors[2].position.z * anchors[2].position.z);
@@ -37,11 +45,6 @@ public class Positioning : MonoBehaviour {
         return new Vector3(x, z, y);
     }
 
-    // Start is called before the first frame update
-    void Start() {
-        // DecodeJSONUpdate("{\"id\":\"1234\",\"links\":[{\"id\":\"5678\",\"range\":\"2.2\"}]}");
-    }
-
     // Update is called once per frame
     void Update() {
         for (int i = 0; i < ranges.Count; i++) {
@@ -52,9 +55,6 @@ public class Positioning : MonoBehaviour {
     public void DecodeJSONUpdate(string JSON) {
         // Parse the incoming JSON string into an array of links
         JsonParseLinks ll = JsonUtility.FromJson<JsonParseLinks>(JSON);
-
-        // Convert into a dictionary for convenience
-        //Dictionary<string, JsonParseLink> links = ll.links.ToDictionary(i => i.id, i => i);
 
         // Iterate over the values received
         Debug.Log($"From tag {ll.id}: ");
