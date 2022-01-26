@@ -182,6 +182,7 @@ void send_json(struct MyLink *p) {
 }
 #endif
 
+// CALLBACK HANDLERS
 void newRange() {
   /*
   // Display on serial monitor
