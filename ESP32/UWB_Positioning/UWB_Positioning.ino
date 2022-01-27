@@ -37,8 +37,8 @@
   // The tag will update a server with its location information
   // allowing it to be remotely tracked
   // Wi-Fi credentials 
-  const char *ssid = "Hyrule";
-  const char *password = "molly1869";
+  const char *ssid = "INSERT SSID HERE";
+  const char *password = "INSERT WIFI PASSWORD HERE";
   // IP address of server to send location information to
   const char *host = "192.168.0.155";
   uint16_t portNum = 50000;
